@@ -20,19 +20,19 @@ import com.amazonaws.serverless.proxy.model.*;
 import com.amazonaws.services.lambda.runtime.Context;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload2.FileItem;
+import org.apache.commons.fileupload2.FileUploadException;
+import org.apache.commons.fileupload2.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload2.jaksrvlt.JakSrvltFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.NullInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.ws.rs.core.MediaType;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -518,14 +518,14 @@ public abstract class AwsHttpServletRequest implements HttpServletRequest {
         if (multipartFormParameters != null) {
             return multipartFormParameters;
         }
-        if (!ServletFileUpload.isMultipartContent(this)) { // isMultipartContent also checks the content type
+        if (!JakSrvltFileUpload.isMultipartContent(this)) { // isMultipartContent also checks the content type
             multipartFormParameters = new HashMap<>();
             return multipartFormParameters;
         }
         Timer.start("SERVLET_REQUEST_GET_MULTIPART_PARAMS");
         multipartFormParameters = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-        ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+        JakSrvltFileUpload upload = new JakSrvltFileUpload(new DiskFileItemFactory());
 
         try {
             List<FileItem> items = upload.parseRequest(this);
