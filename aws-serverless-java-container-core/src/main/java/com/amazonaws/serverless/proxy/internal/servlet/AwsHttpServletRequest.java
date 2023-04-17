@@ -177,15 +177,6 @@ public abstract class AwsHttpServletRequest implements HttpServletRequest {
         return false;
     }
 
-
-    @Override
-    @Deprecated
-    public boolean isRequestedSessionIdFromUrl() {
-        log.debug("Trying to access session. Lambda functions are stateless and should not rely on the session");
-        return false;
-    }
-
-
     //-------------------------------------------------------------
     // Implementation - ServletRequest
     //-------------------------------------------------------------

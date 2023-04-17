@@ -514,14 +514,6 @@ public class AwsProxyHttpServletRequest extends AwsHttpServletRequest {
 
 
     @Override
-    @Deprecated
-    public String getRealPath(String s) {
-        // we are in an archive on a remote server
-        return null;
-    }
-
-
-    @Override
     public int getRemotePort() {
         return 0;
     }
@@ -570,6 +562,21 @@ public class AwsProxyHttpServletRequest extends AwsHttpServletRequest {
                     + " is not in asynchronous mode. Call startAsync before attempting to get the async context.");
         }
         return asyncContext;
+    }
+
+    @Override
+    public String getRequestId() {
+        return null;
+    }
+
+    @Override
+    public String getProtocolRequestId() {
+        return null;
+    }
+
+    @Override
+    public ServletConnection getServletConnection() {
+        return null;
     }
 
     //-------------------------------------------------------------
