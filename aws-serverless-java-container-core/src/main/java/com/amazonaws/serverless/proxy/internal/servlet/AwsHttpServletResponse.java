@@ -151,21 +151,6 @@ public class AwsHttpServletResponse
         return s;
     }
 
-
-//    @Override
-//    @Deprecated
-//    public String encodeUrl(String s) {
-//        return this.encodeURL(s);
-//    }
-
-
-//    @Override
-//    @Deprecated
-//    public String encodeRedirectUrl(String s) {
-//        return this.encodeRedirectURL(s);
-//    }
-
-
     @Override
     public void sendError(int i, String s) throws IOException {
         request.setAttribute(AwsHttpServletRequest.DISPATCHER_TYPE_ATTRIBUTE, DispatcherType.ERROR);
@@ -257,16 +242,6 @@ public class AwsHttpServletResponse
         if (!canSetHeader()) return;
         statusCode = i;
     }
-
-
-//    @Override
-//    @Deprecated
-//    public void setStatus(int i, String s) {
-//        if (!canSetHeader()) return;
-//        statusCode = i;
-//        statusMessage = s;
-//    }
-
 
     @Override
     public int getStatus() {
